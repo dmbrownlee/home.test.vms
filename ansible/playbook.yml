@@ -1,0 +1,6 @@
+---
+# This playbook configures the guest OS as Vagrant creates the VMs.
+- name: Configure the bogus NetGear VM
+  hosts: netgear.home.test
+  roles:
+    - role: vm-common-packages

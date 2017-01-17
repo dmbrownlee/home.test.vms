@@ -1,0 +1,14 @@
+---
+# tasks file for setup-vagrant-base-boxes
+- name: Get the list of installed vagrant base boxes
+  command: "vagrant box list"
+  register: vagrant_box_list
+  ignore_errors: True
+  changed_when: False
+- name: Create missing base boxes
+  command: "ansible-playbook {{ item }}.yml"
+  args:
+    chdir: "{{ ansible_env.HOME }}/vagrantbox/ansible"
+  when: "'{{ item }}' not in vagrant_box_list.stdout"
+  with_items:
+    - "CentOS-7-x86_64-DVD-1511"
