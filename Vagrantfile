@@ -34,11 +34,8 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--boot1", "dvd"]
       vb.customize ["modifyvm", :id, "--boot2", "disk"]
       # Add a SATA controller and reattach default disk to it
-      begin
+      unless (system( "vboxmanage showvminfo netgear 2>/dev/null |grep -q '^SATA Controller (0, 0):'" )) then
         vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
-        rescue   => e
-        puts e
-        puts e.message
       end
       vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/netgear/CentOS-7-x86_64-Minimal-disk1.vmdk"]
     end
