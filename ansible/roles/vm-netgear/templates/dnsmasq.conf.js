@@ -14,3 +14,5 @@ server=8.8.4.4
 dhcp-option=28,192.168.42.255
 # NTP Server
 #dhcp-option=42,0.0.0.0
+# Static IP address reservations
+dhcp-host=50:e5:49:cb:c4:84,192.168.42.2
