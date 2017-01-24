@@ -1,0 +1,31 @@
+---
+# tasks file for vm-netgear dnsmasq
+- name: Installing packages specific to supporting netgear functionality
+  yum: name={{ item }} state=present
+  become: yes
+  with_items:
+    - dnsmasq
+- name: Create /etc/dnsmasq.conf from template
+  template:
+    src: dnsmasq.conf.js
+    dest: /etc/dnsmasq.conf
+    backup: yes
+  become: yes
+- name: Set lower bound of dynamic IP address pool
+  replace:
+    dest: /etc/dnsmasq.conf
+    regexp: '0-MIN'
+    replace: '2'
+  become: yes
+- name: Set upper bound of dynamic IP address pool
+  replace:
+    dest: /etc/dnsmasq.conf
+    regexp: '0-MAX'
+    replace: '2'
+  become: yes
+- name: Enable dnsmasq
+  service:
+    name: dnsmasq
+    state: started
+    enabled: yes
+  become: yes
