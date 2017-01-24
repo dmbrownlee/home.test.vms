@@ -44,7 +44,7 @@ Vagrant.configure(2) do |config|
   # VM for testing kickstart installs for the d1 host
   config.vm.define "d1.home.test" do |node|
     node.vm.box = "CentOS-7-x86_64-Minimal"
-    node.vm.hostname = "d1.host.test"
+    node.vm.hostname = "d1.home.test"
     node.vm.provider "virtualbox" do |vb|
       vb.name = "d1.home.test"
       vb.memory = 8192
@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
       vb.customize ["modifyvm", :id, "--vrde", "off"]
       vb.customize ["modifyvm", :id, "--vram", 16]
-      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test"]
+      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "50e549cbc484"]
       # Detach the hdd created by Vagrant from the IDE controller
       vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", 0, "--device", 0, "--medium", "none"]
       # Add a DVD drive to the IDE controller (do NOT insert disk)
