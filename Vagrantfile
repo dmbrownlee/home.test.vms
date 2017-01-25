@@ -79,4 +79,28 @@ Vagrant.configure(2) do |config|
       vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 2, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d1.home.test/CentOS-7-x86_64-Minimal-disk3.vmdk"]
     end
   end
+
+  # VM for testing kickstart installs for the d2 host
+  config.vm.define "d2.home.test" do |node|
+    node.vm.box = "CentOS-7-x86_64-Minimal"
+    node.vm.hostname = "d2.home.test"
+    node.vm.provider "virtualbox" do |vb|
+      vb.name = "d2.home.test"
+      vb.memory = 1024
+      vb.cpus = 2
+      vb.gui = true
+      vb.customize ["modifyvm", :id, "--ostype", "RedHat_64"]
+      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c:1b:0d:6b:d9:d8"]
+      # Detach the hdd created by Vagrant from the IDE controller
+      vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", 0, "--device", 0, "--medium", "none"]
+      # Add a SATA controller and reattach default disk to it
+      begin
+        vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
+        rescue   => e
+        puts e
+        puts e.message
+      end
+      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d2.home.test/CentOS-7-x86_64-Minimal-disk1.vmdk"]
+    end
+  end
 end
