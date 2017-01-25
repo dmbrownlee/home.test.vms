@@ -90,7 +90,7 @@ Vagrant.configure(2) do |config|
       vb.cpus = 2
       vb.gui = true
       vb.customize ["modifyvm", :id, "--ostype", "RedHat_64"]
-      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c:1b:0d:6b:d9:d8"]
+      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c1b0d6bd9d8"]
       # Detach the hdd created by Vagrant from the IDE controller
       vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", 0, "--device", 0, "--medium", "none"]
       # Add a SATA controller and reattach default disk to it
