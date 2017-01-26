@@ -47,11 +47,10 @@ Vagrant.configure(2) do |config|
     node.vm.hostname = "d1.home.test"
     node.vm.provider "virtualbox" do |vb|
       vb.name = "d1.home.test"
-      vb.memory = 8192
+      vb.memory = 2048
       vb.cpus = 2
       vb.gui = true
       vb.customize ["modifyvm", :id, "--ostype", "RedHat_64"]
-      vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
       vb.customize ["modifyvm", :id, "--vrde", "off"]
       vb.customize ["modifyvm", :id, "--vram", 16]
       vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "50e549cbc484"]
@@ -91,6 +90,9 @@ Vagrant.configure(2) do |config|
       vb.cpus = 2
       vb.gui = true
       vb.customize ["modifyvm", :id, "--ostype", "RedHat_64"]
+      vb.customize ["modifyvm", :id, "--vrde", "off"]
+      vb.customize ["modifyvm", :id, "--boot1", "dvd"]
+      vb.customize ["modifyvm", :id, "--boot2", "disk"]
       vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c1b0d6bd9d6"]
       vb.customize ["modifyvm", :id, "--nic2", "intnet", "--cableconnected2", "on", "--nicpromisc2", "allow-vms", "--intnet2", "nsm", "--macaddress2", "1c1b0d6bd9d8"]
       # Detach the hdd created by Vagrant from the IDE controller
