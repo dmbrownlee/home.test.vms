@@ -55,6 +55,7 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--vrde", "off"]
       vb.customize ["modifyvm", :id, "--vram", 16]
       vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "50e549cbc484"]
+      vb.customize ["modifyvm", :id, "--nic2", "intnet", "--cableconnected2", "on", "--nicpromisc2", "allow-vms", "--intnet2", "nsm", "--macaddress1", "50e549cbc485"]
       # Detach the hdd created by Vagrant from the IDE controller
       vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", 0, "--device", 0, "--medium", "none"]
       # Add a DVD drive to the IDE controller (do NOT insert disk)
@@ -86,11 +87,12 @@ Vagrant.configure(2) do |config|
     node.vm.hostname = "d2.home.test"
     node.vm.provider "virtualbox" do |vb|
       vb.name = "d2.home.test"
-      vb.memory = 1024
+      vb.memory = 2048
       vb.cpus = 2
       vb.gui = true
       vb.customize ["modifyvm", :id, "--ostype", "RedHat_64"]
-      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c1b0d6bd9d8"]
+      vb.customize ["modifyvm", :id, "--nic1", "intnet", "--cableconnected1", "on", "--nicpromisc1", "allow-vms", "--intnet1", "home.test", "--macaddress1", "1c1b0d6bd9d6"]
+      vb.customize ["modifyvm", :id, "--nic2", "intnet", "--cableconnected2", "on", "--nicpromisc2", "allow-vms", "--intnet2", "nsm", "--macaddress2", "1c1b0d6bd9d8"]
       # Detach the hdd created by Vagrant from the IDE controller
       vb.customize ["storageattach", :id, "--storagectl", "IDE Controller", "--port", 0, "--device", 0, "--medium", "none"]
       # Add a SATA controller and reattach default disk to it
