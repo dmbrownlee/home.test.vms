@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
       unless (system( "vboxmanage showvminfo netgear 2>/dev/null |grep -q '^SATA Controller (0, 0):'" )) then
         vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
       end
-      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/netgear/CentOS-7-x86_64-Minimal-disk1.vmdk"]
+      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/netgear/CentOS-7-x86_64-Minimal-disk001.vmdk"]
     end
   end
 
@@ -70,7 +70,7 @@ Vagrant.configure(2) do |config|
         puts e
         puts e.message
       end
-      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d1.home.test/CentOS-7-x86_64-Minimal-disk1.vmdk"]
+      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d1.home.test/CentOS-7-x86_64-Minimal-disk001.vmdk"]
       # Create and attach two more drives to mimic the drives in the
       # physical workstation
       vb.customize ["createmedium", "disk", "--filename", "/Users/dmb/VirtualBox VMs/d1.home.test/CentOS-7-x86_64-Minimal-disk2.vmdk", "--size", 40000, "--format", "VMDK"]
@@ -104,7 +104,7 @@ Vagrant.configure(2) do |config|
         puts e
         puts e.message
       end
-      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d2.home.test/CentOS-7-x86_64-Minimal-disk1.vmdk"]
+      vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", 0, "--device", 0, "--type", "hdd", "--medium", "/Users/dmb/VirtualBox VMs/d2.home.test/CentOS-7-x86_64-Minimal-disk001.vmdk"]
     end
   end
 end
