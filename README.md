@@ -11,11 +11,23 @@ $ mkdir ~/projects && cd ~/projects
 $ git clone git@github.com:dmbrownlee/home.test.vms.git
 $ cd home.test.vms && ./setup
 
-That downloads the necessary software.  Now you can create the VMs with:
+That downloads and installs the necessary software.  Next, we create the VM
+to emulate the functions of the home router (Wireless AP/router providing a
+gateway to the Internet as well as DHCP/DNS services for the network)
 
 $ vagrant up netgear
+$ vagrant reload netgear
+
+Now create the first server on the network.
+
 $ vagrant up --no-provision d1.home.test
 
+This will create the VM but the provisioning process will fail to connect via
+ssh because all the network interfaces are internal only.  This is expected.
+
 After the virtual hardware has been created, shutdown the VM, "insert" the
-ISO image, and install as you would on the physical machine.  See the
-README.md in the home.test repository for more details.
+CentOS 7 NetInstall ISO image in the VM settings and follow these steps:
+
+1. Boot start the VM
+2. At the installation menu, press [tab] to append to the kernel boot line
+3. Add "inst.ks=https://raw.githubusercontent.com/dmbrownlee/home.test/master/d1-ks.cfg" and press [enter].
