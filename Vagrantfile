@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.ssh.private_key_path= "../keys/vagrant"
+  config.ssh.private_key_path= "#{ENV['HOME']}/keys/vagrant"
   config.ssh.pty = true
   # Common to all VMs
   config.vm.box = "CentOS-7-x86_64-Everything"
